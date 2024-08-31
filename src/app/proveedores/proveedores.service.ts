@@ -17,12 +17,17 @@ export class ProveedoresService {
   createProveedor(data: Proveedores){
     return this.httpClient.post('http://localhost:3000/proveedores',data);
   }
-  editarProveedor(idProveedor:number){
-    return this.httpClient.get<Proveedores>(`http://localhost:3000/proveedores/${idProveedor}`);
+  editProveedor(id:number){
+    return this.httpClient.get<Proveedores>(`http://localhost:3000/proveedores/${id}`);
   }
 
   updateProveedor(data:Proveedores){
-    return this.httpClient.put<Proveedores>(`http://localhost:3000/proveedores/${data.idProveedor}`,data);
-     
+    return this.httpClient.put<Proveedores>(`http://localhost:3000/proveedores/${data.id}`, data);
+
    }
+
+   deleteProveedor(id:number){
+    return this.httpClient.delete<Proveedores>(`http://localhost:3000/proveedores/${id}`);
+  }
+
 }

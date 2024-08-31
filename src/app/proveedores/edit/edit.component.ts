@@ -10,30 +10,30 @@ import { ProveedoresService } from '../proveedores.service';
 export class EditComponent implements OnInit {
   constructor(private proveedoresService:ProveedoresService, private router:Router,private route:ActivatedRoute){}
 
-  process_data:Proveedores= {
-    idProveedor:0,
+  process_data:Proveedores = {
+    id:0,
     nombre:''
   }
   ngOnInit(): void {
     this.route.paramMap.subscribe((param) => {
-      let idProveedor = Number(param.get('idProveedor'));
-      this.getById(idProveedor);
+      let id = Number(param.get('id'));
+      this.getById(id);
     });
     }
-    getById(idProveedor:number){
-      this.proveedoresService.editarProveedor(idProveedor).subscribe((data)=>{
-        this.process_data=data;
-      })
+  getById(id:number){
+    this.proveedoresService.editProveedor(id).subscribe((data)=>{
+      this.process_data=data;
+    });
   }
 
   update(){
     this.proveedoresService.updateProveedor(this.process_data).subscribe({
       next:(data) => {
-        this.router.navigate(["/proveedores/home"]);
+        this.router.navigateByUrl("/proveedores/home");
       },
       error:(err) => {
         console.log(err)
       }
-    })
+    });
   }
 }

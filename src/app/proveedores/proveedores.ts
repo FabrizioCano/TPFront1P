@@ -1,5 +1,5 @@
 export interface Proveedores {
-    idProveedor:number,
+    id:number,
     nombre:string
 }
 

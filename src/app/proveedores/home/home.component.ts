@@ -20,4 +20,13 @@ export class HomeComponent implements OnInit{
         this.listproveedores=data;
       });
   }
+
+  delete(id:number){
+    this.serviciosProveedor.deleteProveedor(id).subscribe((data)=> {
+      next: () => {
+        this.listproveedores=this.listproveedores.filter(_=>_.id !=id)
+        alert("Se ha borrado el Proveedor");
+      }
+    });
+  }
 }

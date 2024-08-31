@@ -5,10 +5,6 @@
       <label for="txtName" class="form-label">Nombre</label>
       <input type="text" name='name' [(ngModel)] = "process_data.nombre" class="form-control" id="txtName">
     </div>
-    <div class="mb-3">
-        <label for="txtidProveedor" class="form-label">Id del Proveedor</label>
-        <input type="text" name='idProveedor' [(ngModel)] = "process_data.idProveedor" class="form-control" id="txtidProveedor">
-    </div>
     <button type="button" (click)="create()" class="btn btn-primary">Crear</button>
   </form>
 </div>

@@ -11,7 +11,7 @@ import { Proveedores } from '../proveedores';
 export class CreateComponent {
   constructor(private proveedoresService:ProveedoresService,private router:Router){}
   process_data: Proveedores={
-    idProveedor:0,
+    id:0,
     nombre:''
   }
 
@@ -19,10 +19,13 @@ export class CreateComponent {
     this.proveedoresService.createProveedor(this.process_data).subscribe({
       next:(data) => {
         this.router.navigateByUrl("/proveedores/home");
+        alert("Proveedor creado");
       },
+
       error:(err) => {
         console.log(err)
       }
     })
   }
+
 }
