@@ -1,0 +1,39 @@
+{
+  "proveedores": [
+    {
+      "idProveedor": 1,
+      "nombre": "Lacteos SO",
+      "id": "fb41"
+    },
+    {
+      "idProveedor": 2,
+      "nombre": "Stark House",
+      "id": "92c5"
+    },
+    {
+      "idProveedor": 3,
+      "nombre": "House Targaryen",
+      "id": "010b"
+    },
+    {
+      "idProveedor": 4,
+      "nombre": "Mordor",
+      "id": "48f2"
+    },
+    {
+      "idProveedor": 5,
+      "nombre": "The Empire",
+      "id": "e927"
+    },
+    {
+      "id": "5a84",
+      "idProveedor": "7",
+      "nombre": "jose"
+    },
+    {
+      "id": "498b",
+      "idProveedor": "6",
+      "nombre": "jo"
+    }
+  ]
+}
