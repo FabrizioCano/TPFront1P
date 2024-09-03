@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Turnos de Recepción</title>
+</head>
+<body>
+    <div class="col-6 mx-auto card p-3 shadow-lg">
+        <h2 class="text-center">Reserva de Turnos de Recepción</h2>
+        
+        <form (ngSubmit)="guardarReserva()">
+            <!-- Campos de la cabecera -->
+            <div class="mb-3">
+                <label for="horaInicio" class="form-label">Hora Inicio Agendamiento:</label>
+                <select id="horaInicio" [(ngModel)]="cabecera.horaInicioAgendamiento" name="horaInicio" class="form-select">
+                    <option *ngFor="let hora of horasDisponibles" [value]="hora">{{hora}}</option>
+                </select>
+            </div>
+    
+            <div class="mb-3">
+                <label for="horaFin" class="form-label">Hora Fin Agendamiento:</label>
+                <select id="horaFin" [(ngModel)]="cabecera.horaFinAgendamiento" name="horaFin" class="form-select">
+                    <option *ngFor="let hora of horasDisponibles" [value]="hora">{{hora}}</option>
+                </select>
+            </div>
+    
+            <div class="mb-3">
+                <label for="proveedor" class="form-label">Proveedor:</label>
+                <select id="proveedor" [(ngModel)]="cabecera.idProveedor" name="proveedor" class="form-select">
+                    <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{proveedor.nombre}}</option>
+                </select>
+            </div>
+    
+            <!-- Detalles -->
+            <div *ngFor="let detalle of detalles; let i = index" class="mb-3 border p-2 rounded">
+                <label for="producto" class="form-label">Producto:</label>
+                <select id="producto" [(ngModel)]="detalle.idProducto" name="producto{{i}}" class="form-select mb-2">
+                    <option *ngFor="let producto of productos" [value]="producto.id">{{producto.nombre}}</option>
+                </select>
+    
+                <label for="cantidad" class="form-label">Cantidad:</label>
+                <input id="cantidad" type="number" [(ngModel)]="detalle.cantidad" name="cantidad{{i}}" class="form-control">
+                
+                <button type="button" (click)="eliminarDetalle(i)" class="btn btn-danger mt-2">Eliminar</button>
+            </div>
+    
+            <!-- Botón para agregar un nuevo detalle -->
+            <button type="button" (click)="agregarDetalle()" class="btn btn-secondary mb-3">Agregar Producto</button>
+    
+            <!-- Botón para guardar la reserva -->
+            <button type="submit" class="btn btn-primary w-100">Guardar Reserva</button>
+        </form>
+    </div>
+    
+</body>
+</html>
