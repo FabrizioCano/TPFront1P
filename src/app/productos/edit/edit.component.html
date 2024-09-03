@@ -1,0 +1,10 @@
+<div>
+  <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+      <h1>Editar Poducto</h1>
+      <div class="mb-3">
+        <label for="txtName" class="form-label">Nombre de Proveedor</label>
+        <input type="text" name='name' [(ngModel)]= "process_data.nombre" class="form-control" id="txtName">
+      </div>
+      <button type="button" (click)="update()" class="btn btn-primary">Actualizar</button>
+    </form>
+</div>

@@ -1,0 +1,12 @@
+<div>
+  <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+      <h1>Crear Producto</h1>
+      <div class="mb-3">
+        <label for="txtName" class="form-label">Nombre</label>
+        <input type="text" name='name' [(ngModel)] = "process_data.nombre" class="form-control" id="txtName">
+      </div>
+
+      <button type="button" (click)="create()" class="btn btn-primary">Crear</button>
+    </form>
+  </div>
+

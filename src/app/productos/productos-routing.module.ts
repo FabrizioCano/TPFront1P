@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { CreateComponent } from './create/create.component';
 import { EditComponent } from './edit/edit.component';
-
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  {path: 'home', component: HomeComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'proveedores/create', component:CreateComponent },
-  { path: 'proveedores/edit/:id', component:EditComponent },
+  { path: 'productos/create', component:CreateComponent },
+  { path: 'productos/edit/:id', component:EditComponent },
 
 ];
 
@@ -17,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ProveedoresRoutingModule { }
+export class ProductosRoutingModule { }

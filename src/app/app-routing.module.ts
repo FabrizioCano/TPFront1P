@@ -1,9 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './proveedores/home/home.component';
+import { HomeComponent } from './home/home.component';
+import { ProveedoresModule } from './proveedores/proveedores.module';
+import { ProductosModule } from './productos/productos.module';
+import { AppWrapperComponent } from './app-wrapper/app-wrapper.component';
 
 const routes: Routes = [
- 
+    { path: '', component: AppWrapperComponent, children: [
+    { path: 'proveedores', loadChildren: () => import('./proveedores/proveedores.module').then(m => m.ProveedoresModule) },
+    { path: 'productos', loadChildren: () => import('./productos/productos.module').then(m => m.ProductosModule) },
+    ]},
+  /* { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' }, */
 ];
 
 @NgModule({

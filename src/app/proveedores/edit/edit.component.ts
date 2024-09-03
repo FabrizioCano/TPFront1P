@@ -3,7 +3,7 @@ import { ActivatedRoute,Router } from '@angular/router';
 import { Proveedores } from '../proveedores';
 import { ProveedoresService } from '../proveedores.service';
 @Component({
-  selector: 'app-edit',
+  selector: 'app-edit-proveedores',
   templateUrl: './edit.component.html',
   styleUrl: './edit.component.css'
 })

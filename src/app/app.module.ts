@@ -8,10 +8,15 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProveedoresModule } from './proveedores/proveedores.module';
 import { RouterModule, Routes} from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { AppWrapperComponent } from './app-wrapper/app-wrapper.component';
+import { ProductosModule } from './productos/productos.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    AppWrapperComponent
   ],
   imports: [
     BrowserModule,
@@ -20,6 +25,7 @@ import { RouterModule, Routes} from '@angular/router';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    ProductosModule,
     ProveedoresModule,
     RouterModule
 
