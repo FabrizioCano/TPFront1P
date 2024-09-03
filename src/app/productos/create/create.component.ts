@@ -1,25 +1,24 @@
 import { Component } from '@angular/core';
-import { ProveedoresService } from '../proveedores.service';
 import { Router } from '@angular/router';
-import { Proveedores } from '../proveedores';
+import { ProductosService } from '../productos.service';
+import { Productos } from '../productos';
 
 @Component({
-  selector: 'app-create-proveedores',
+  selector: 'app-create-productos',
   templateUrl: './create.component.html',
   styleUrl: './create.component.css'
 })
 export class CreateComponent {
-
-  constructor(private proveedoresService:ProveedoresService,private router:Router){}
+  constructor(private productosService:ProductosService,private router:Router){}
 
   providers: any[] = [];
   nextId: number = 1;
-  process_data: Proveedores={
+  process_data: Productos={
     id:0,
     nombre:''
   }
   ngOnInit(): void {
-    this.proveedoresService.getAll().subscribe({
+    this.productosService.getAll().subscribe({
       next: (data) => {
         this.providers = data;
         this.setId();
@@ -39,10 +38,10 @@ export class CreateComponent {
 
   create(){
     this.process_data.id=this.nextId;
-    this.proveedoresService.createProveedor(this.process_data).subscribe({
+    this.productosService.createProductos(this.process_data).subscribe({
       next:(data) => {
-        this.router.navigateByUrl("/proveedores/home");
-        alert("Proveedor creado");
+        this.router.navigateByUrl("/productos/home");
+        alert("Producto creado");
       },
 
       error:(err) => {
@@ -52,3 +51,4 @@ export class CreateComponent {
   }
 
 }
+

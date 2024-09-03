@@ -1,0 +1,12 @@
+<ng-container *ngIf="isHomeRoute">
+  <app-home></app-home>
+
+  <h1>Home</h1>
+  <div class="container">
+    <button class="btn btn-primary" routerLink="/proveedores/home">Go to Proveedores</button>
+  </div>
+  <div class="container mt-5">
+    <button class="btn btn-primary" routerLink="/productos/home">Go to Productos</button>
+  </div>
+</ng-container>
+<router-outlet></router-outlet>
