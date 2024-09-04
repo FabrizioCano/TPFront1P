@@ -12,16 +12,16 @@ export class EditComponent {
   constructor(private productosService:ProductosService, private router:Router,private route:ActivatedRoute){}
 
   process_data:Productos = {
-    id:0,
+    id:'',
     nombre:''
   }
   ngOnInit(): void {
     this.route.paramMap.subscribe((param) => {
-      let id = Number(param.get('id'));
+      const id = param.get('id')!;
       this.getById(id);
     });
     }
-  getById(id:number){
+  getById(id:string){
     this.productosService.editProductos(id).subscribe((data)=>{
       this.process_data=data;
     });
