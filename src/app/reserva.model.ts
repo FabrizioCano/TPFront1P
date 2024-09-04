@@ -14,4 +14,3 @@ export interface ReservaCabecera {
     idProducto: number;
     cantidad: number;
   }
-  
