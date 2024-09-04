@@ -1,0 +1,19 @@
+<div class="jaula-form">
+  <h2>Agregar Nueva Jaula</h2>
+
+  <form method="post" enctype="multipart/form-data" (ngSubmit)="addJaula()">
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" [(ngModel)] = "newJaula.nombre" name="nombre" required />
+    </div>
+    <div>
+      <label for="enUso">En Uso:</label>
+      <select id="enUso" [(ngModel)] = "newJaula.enUso" name="enUso" required>
+        <option [value]="true">S</option>
+        <option [value]="false">N</option>
+      </select>
+    </div>
+    <button type="submit">Agregar Jaula</button>
+    <button type="button" [routerLink]="['/jaulas']">Cancelar</button>
+  </form>
+</div>

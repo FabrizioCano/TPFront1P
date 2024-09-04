@@ -18,7 +18,7 @@ export class ProductosService {
     createProductos(data: Productos){
       return this.httpClient.post('http://localhost:3000/productos',data);
     }
-    editProductos(id:number){
+    editProductos(id:string){
       return this.httpClient.get<Productos>(`http://localhost:3000/productos/${id}`);
     }
 
@@ -27,7 +27,7 @@ export class ProductosService {
 
      }
 
-     deleteProductos(id:number){
+     deleteProductos(id:string){
       return this.httpClient.delete<Productos>(`http://localhost:3000/productos/${id}`);
     }
 

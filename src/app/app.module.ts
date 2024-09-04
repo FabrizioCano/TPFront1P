@@ -11,6 +11,7 @@ import { RouterModule, Routes} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AppWrapperComponent } from './app-wrapper/app-wrapper.component';
 import { ProductosModule } from './productos/productos.module';
+import { JaulasModule } from './jaulas/jaulas.module';
 import { ReservaTurnosComponent } from './reserva-turnos/reserva-turnos.component';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { ReservaTurnosComponent } from './reserva-turnos/reserva-turnos.componen
     FormsModule,
     ProductosModule,
     ProveedoresModule,
+    JaulasModule,
     RouterModule
 
   ],

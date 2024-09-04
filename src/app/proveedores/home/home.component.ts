@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit{
       });
   }
 
-  delete(id:number){
+  delete(id:string){
     this.serviciosProveedor.deleteProveedor(id).subscribe((data)=> {
       next: () => {
         this.listproveedores=this.listproveedores.filter(_=>_.id !=id)

@@ -11,16 +11,16 @@ export class EditComponent implements OnInit {
   constructor(private proveedoresService:ProveedoresService, private router:Router,private route:ActivatedRoute){}
 
   process_data:Proveedores = {
-    id:0,
+    id:'',
     nombre:''
   }
   ngOnInit(): void {
     this.route.paramMap.subscribe((param) => {
-      let id = Number(param.get('id'));
+      let id = param.get('id')!;
       this.getById(id);
     });
     }
-  getById(id:number){
+  getById(id:string){
     this.proveedoresService.editProveedor(id).subscribe((data)=>{
       this.process_data=data;
     });

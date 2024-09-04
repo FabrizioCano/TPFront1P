@@ -15,7 +15,7 @@ export class CreateComponent {
   providers: any[] = [];
   nextId: number = 1;
   process_data: Proveedores={
-    id:0,
+    id:'',
     nombre:''
   }
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class CreateComponent {
   }
 
   create(){
-    this.process_data.id=this.nextId;
+    this.process_data.id=(this.nextId).toString();
     this.proveedoresService.createProveedor(this.process_data).subscribe({
       next:(data) => {
         this.router.navigateByUrl("/proveedores/home");

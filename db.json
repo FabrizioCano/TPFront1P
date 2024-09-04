@@ -13,42 +13,21 @@
       "nombre": "Fire And blood"
     },
     {
-      "id": "0",
-      "nombre": "?ose"
-    },
-    {
       "id": "1",
       "nombre": "John"
-    },
-    {
-      "id": "2",
-      "nombre": "Stark"
-    },
-    {
-      "id": 11,
-      "nombre": "Falafel"
     }
   ],
   "productos": [
     {
-      "id": "1",
-      "nombre": "Leche"
-    },
-    {
-      "id": "2",
-      "nombre": "Pasta"
-    },
-    {
       "id": "3",
       "nombre": "Frutas"
-    },
+    }
+  ],
+  "jaulas": [
     {
-      "id": "4",
-      "nombre": "Agua"
-    },
-    {
-      "id": 5,
-      "nombre": "Losa"
+      "id": "1",
+      "nombre": "Jaula A",
+      "enUso": false
     }
   ]
 }

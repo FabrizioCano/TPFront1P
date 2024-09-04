@@ -21,7 +21,7 @@ export class HomeComponent {
       });
   }
 
-  delete(id:number){
+  delete(id:string){
     this.serviciosProductos.deleteProductos(id).subscribe((data)=> {
       next: () => {
         this.listproductos=this.listproductos.filter(_=>_.id !=id)
