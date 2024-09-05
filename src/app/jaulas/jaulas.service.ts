@@ -30,4 +30,7 @@ export class JaulasService {
   deleteJaula(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+  getJaulasLibres(): Observable<Jaula[]> {
+    return this.http.get<Jaula[]>(`${this.apiUrl}?enUso=false`); // Solo jaulas libres
+  }
 }

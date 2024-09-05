@@ -35,71 +35,71 @@
     {
       "id": "1",
       "nombre": "Jaula A",
-      "enUso": false
+      "enUso": true
     },
     {
       "id": "2",
-      "nombre": "Jaula B",
-      "enUso": false
+      "nombre": "ts",
+      "enUso": true
     },
     {
       "id": "3",
-      "nombre": "Jaula C",
-      "enUso": false
+      "nombre": "jaula 3",
+      "enUso": true
     }
   ],
-  "reservas": [
+  "turnos": [
     {
-      "id": "941e",
-      "fecha": "2024-09-07",
-      "horaInicioAgendamiento": "07:30",
+      "idTurno": 1,
+      "fecha": "2024-09-03",
+      "horaInicioAgendamiento": "08:00",
+      "horaFinAgendamiento": "09:00",
+      "idProveedor": 3,
+      "idJaula": null,
+      "horaInicioRecepcion": null,
+      "horaFinRecepcion": null
+    },
+    {
+      "idTurno": 2,
+      "fecha": "2024-09-03",
+      "horaInicioAgendamiento": "10:00",
+      "horaFinAgendamiento": "11:00",
+      "idProveedor": 4,
+      "idJaula": null,
+      "horaInicioRecepcion": null,
+      "horaFinRecepcion": null
+    },
+    {
+      "idTurno": 3,
+      "fecha": "2024-09-04",
+      "horaInicioAgendamiento": "12:00",
       "horaFinAgendamiento": "13:00",
-      "idProveedor": "3",
-      "idJaula": "3",
-      "horaInicioRecepcion": "12:00",
-      "horaFinRecepcion": "13:00",
-      "detalles_res": [
-        {
-          "idProducto": "3",
-          "cantidad": 2
-        },
-        {
-          "idProducto": "4",
-          "cantidad": 1
-        }
-      ]
+      "idProveedor": 9,
+      "idJaula": null,
+      "horaInicioRecepcion": null,
+      "horaFinRecepcion": null
+    }
+  ],
+  "detalles": [
+    {
+      "idTurno": 1,
+      "idProducto": 1,
+      "cantidad": 10
     },
     {
-      "id": "feb9",
-      "fecha": "2024-09-06",
-      "horaInicioAgendamiento": "07:00",
-      "horaFinAgendamiento": "11:30",
-      "idProveedor": "3",
-      "idJaula": "1",
-      "horaInicioRecepcion": "15:00",
-      "horaFinRecepcion": "15:00",
-      "detalles_res": [
-        {
-          "idProducto": "4",
-          "cantidad": 3
-        },
-        {
-          "idProducto": "3",
-          "cantidad": 1
-        }
-      ]
+      "idTurno": 1,
+      "idProducto": 2,
+      "cantidad": 20
     },
     {
-      "id": "6f5a",
-      "idProducto": "4",
-      "cantidad": 3,
-      "idTurno": "feb9"
+      "idTurno": 2,
+      "idProducto": 3,
+      "cantidad": 105
     },
     {
-      "id": "1d49",
-      "idProducto": "3",
-      "cantidad": 1,
-      "idTurno": "feb9"
+      "idTurno": 3,
+      "idProducto": 4,
+      "cantidad": 5
     }
   ]
 }
