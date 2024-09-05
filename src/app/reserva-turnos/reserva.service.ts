@@ -26,7 +26,7 @@ export class ReservaService {
 
   // Obtener productos
   getJaulas(): Observable<Jaula[]> {
-    return this.http.get<Jaula[]>(`${this.apiUrl}/Jaula`);
+    return this.http.get<Jaula[]>(`${this.apiUrl}/jaulas`);
   }
 
   // Guardar reserva

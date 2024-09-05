@@ -1,4 +1,5 @@
 export interface ReservaCabecera {
+    detalles_res: { idProducto: string; cantidad: number;idTurno?:string;id?:string }[];
     id: string;
     fecha: string;
     horaInicioAgendamiento: string;
@@ -8,10 +9,10 @@ export interface ReservaCabecera {
     horaInicioRecepcion?: string;
     horaFinRecepcion?: string;
   }
-  
+
   export interface ReservaDetalle {
     id: string;
     idProducto: string;
     cantidad: number;
+    idTurno?:string;
   }
-  

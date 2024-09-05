@@ -48,5 +48,58 @@
       "enUso": false
     }
   ],
-  "reservas": []
+  "reservas": [
+    {
+      "id": "941e",
+      "fecha": "2024-09-07",
+      "horaInicioAgendamiento": "07:30",
+      "horaFinAgendamiento": "13:00",
+      "idProveedor": "3",
+      "idJaula": "3",
+      "horaInicioRecepcion": "12:00",
+      "horaFinRecepcion": "13:00",
+      "detalles_res": [
+        {
+          "idProducto": "3",
+          "cantidad": 2
+        },
+        {
+          "idProducto": "4",
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": "feb9",
+      "fecha": "2024-09-06",
+      "horaInicioAgendamiento": "07:00",
+      "horaFinAgendamiento": "11:30",
+      "idProveedor": "3",
+      "idJaula": "1",
+      "horaInicioRecepcion": "15:00",
+      "horaFinRecepcion": "15:00",
+      "detalles_res": [
+        {
+          "idProducto": "4",
+          "cantidad": 3
+        },
+        {
+          "idProducto": "3",
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": "6f5a",
+      "idProducto": "4",
+      "cantidad": 3,
+      "idTurno": "feb9"
+    },
+    {
+      "id": "1d49",
+      "idProducto": "3",
+      "cantidad": 1,
+      "idTurno": "feb9"
+    }
+  ]
 }
