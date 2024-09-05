@@ -1,92 +1,100 @@
-<!-- Tabla de Turnos -->
 <div class="container">
-  <h2>Turnos Agendados</h2>
-  <label for="fecha">Fecha</label>
-  <input id="fecha" type="date" [(ngModel)]="fechaSeleccionada" />
+  <h2>Listado de Turnos</h2>
 
-  <button class="btn btn-primary" (click)="filtrarTurnos()">Filtrar</button>
+  <!-- Date Picker -->
+  <div class="form-group">
+    <label for="fecha">Fecha:</label>
+    <input type="date" id="fecha" [(ngModel)]="fechaSeleccionada" class="form-control">
+  </div>
 
-  <table class="table mt-4">
+  <!-- Filter Button -->
+  <div class="form-group">
+    <button (click)="filtrarTurnos()" class="btn btn-primary">Filtrar</button>
+  </div>
+
+  <!-- Turnos Table -->
+  <table class="table table-striped">
     <thead>
       <tr>
-        <th>Inicio Agendamiento</th>
-        <th>Fin Agendamiento</th>
         <th>Proveedor</th>
-        <th>Estado</th>
         <th>Jaula</th>
-        <th>Inicio Recepción</th>
-        <th>Fin Recepción</th>
-        <th>Acciones</th>
+        <th>Hora Inicio Agendamiento</th>
+        <th>Hora Fin Agendamiento</th>
+        <th>Hora Inicio Recepción</th>
+        <th>Hora Fin Recepción</th>
         <th>Detalles</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let turno of turnosFiltrados">
-        <td>{{ turno.horaInicioAgendamiento }}</td>
-        <td>{{ turno.horaFinAgendamiento }}</td>
         <td>{{ obtenerNombreProveedor(turno.idProveedor) }}</td>
-        <td>{{ obtenerEstado(turno) }}</td>
         <td>{{ obtenerJaula(turno.idJaula) }}</td>
-        <td>{{ formatearHora(turno.horaInicioRecepcion) || '-' }}</td>
-        <td>{{ formatearHora(turno.horaFinRecepcion) || '-' }}</td>
-        
+        <td>{{ formatearHora(turno.horaInicioAgendamiento) }}</td>
+        <td>{{ formatearHora(turno.horaFinAgendamiento) }}</td>
+        <td>{{ formatearHora(turno.horaInicioRecepcion) }}</td>
+        <td>{{ formatearHora(turno.horaFinRecepcion) }}</td>
         <td>
-          <button *ngIf="puedeIniciarRecepcion(turno)" class="btn btn-primary" (click)="abrirModalRecepcion(turno)">Iniciar Recepción</button>
-          <button *ngIf="puedeFinalizarRecepcion(turno)" class="btn btn-success" (click)="finalizarRecepcion(turno)">Finalizar Recepción</button>
+          <button (click)="verDetalles(turno.id)" class="btn btn-info">Ver Detalles</button>
         </td>
-        <td><button class="btn btn-link" (click)="verDetalles(turno.idTurno)">Ver Detalles</button></td>
+        <td>
+          <button (click)="abrirModalRecepcion(turno)" class="btn btn-primary" [disabled]="!puedeIniciarRecepcion(turno)">Iniciar Recepción</button>
+          <button (click)="finalizarRecepcion(turno)" class="btn btn-success" [disabled]="!puedeFinalizarRecepcion(turno)">Finalizar Recepción</button>
+        </td>
       </tr>
     </tbody>
   </table>
+
+  <!-- Modal for Details -->
+  <ng-template #modalDetalle let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Detalles del Turno</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let detalle of productosDelTurno">
+            <td>{{ obtenerNombreProducto(detalle.idProducto) }}</td>
+            <td>{{ detalle.cantidad }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Cerrar</button>
+    </div>
+  </ng-template>
+
+  <!-- Modal for Reception -->
+  <ng-template #modalRecepcion let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Recepción del Turno</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+          <label for="jaula">Seleccionar Jaula:</label>
+          <select id="jaula" [(ngModel)]="jaulaSeleccionada" name="jaula" class="form-control">
+            <option *ngFor="let jaula of jaulasDisponibles" [ngValue]="jaula">{{ obtenerJaula(jaula.id) }}</option>
+          </select>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Cancelar</button>
+      <button type="button" class="btn btn-primary" (click)="confirmarRecepcion()">Confirmar Recepción</button>
+    </div>
+  </ng-template>
 </div>
-
-<!-- Modal para Iniciar Recepción -->
-<ng-template #modalRecepcion let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">Iniciar Recepción</h4>
-    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <label for="jaula">Seleccione una Jaula</label>
-    <select id="jaula" class="form-control" [(ngModel)]="jaulaSeleccionada">
-      <option *ngFor="let jaula of jaulasDisponibles" [ngValue]="jaula">
-        {{ jaula.id }}
-      </option>
-    </select>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-primary" (click)="confirmarRecepcion()">Aceptar</button>
-    <button class="btn btn-secondary" (click)="modal.dismiss()">Cerrar</button>
-  </div>
-</ng-template>
-
-<!-- Modal para Ver Detalles del Turno -->
-<ng-template #modalDetalle let-modal>
-  <div class="modal-header">
-    <h4 class="modal-title">Detalles del Turno</h4>
-    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Producto</th>
-          <th>Cantidad</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let detalle of productosDelTurno">
-          <td>{{ detalle.idProducto }}</td>
-          <td>{{ detalle.cantidad }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="modal-footer">
-    <button class="btn btn-secondary" (click)="modal.dismiss()">Cerrar</button>
-  </div>
-</ng-template>

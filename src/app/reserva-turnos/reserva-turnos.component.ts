@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { ReservaService } from './reserva.service';
 import { Proveedores } from '../proveedores/proveedores';
 import { Productos } from '../productos/productos';
@@ -31,8 +31,8 @@ export class ReservaTurnosComponent implements OnInit {
       horaFinAgendamiento: ['', Validators.required],
       idProveedor: ['', Validators.required],
       idJaula: ['', Validators.required],
-      horaInicioRecepcion: ['', Validators.required],
-      horaFinRecepcion: ['', Validators.required],
+      horaInicioRecepcion: [''],
+      horaFinRecepcion: [''],
       detalles_res: this.fb.array([])
     });
   }
@@ -69,34 +69,57 @@ export class ReservaTurnosComponent implements OnInit {
   }
 
   onSubmit() {
+    const reserva = this.reservaForm.value;
 
-    const reserva: ReservaCabecera = this.reservaForm.value;
+    // Convert date and time formats
+    const fechaFormatted = this.formatDateInput(reserva.fecha);
+    const horaInicioAgendamientoFormatted = this.convertTimeFormat(reserva.horaInicioAgendamiento);
+    const horaFinAgendamientoFormatted = this.convertTimeFormat(reserva.horaFinAgendamiento);
 
-    const detalles = reserva.detalles_res.map((detalle: any) => {
-      const { idTurno, ...rest } = detalle;
-      return rest;
-    });
-
-    const reservaData = { ...reserva, detalles_res: detalles };
+    // Create ReservaCabecera object with formatted values
+    const reservaData: ReservaCabecera = {
+      ...reserva,
+      fecha: fechaFormatted,
+      horaInicioAgendamiento: horaInicioAgendamientoFormatted,
+      horaFinAgendamiento: horaFinAgendamientoFormatted,
+      detalles_res: reserva.detalles_res.map((detalle: any) => ({
+        ...detalle,
+        idTurno: reserva.id
+      }))
+    };
 
     this.reservaService.addReserva(reservaData).subscribe(response => {
       const idTurno = response.id;
 
-
-      const detallesConTurno = reserva.detalles_res.map((detalle: any) => ({
+      // Add Turno ID to each detalle
+      const detallesConTurno = reservaData.detalles_res.map((detalle: any) => ({
         ...detalle,
         idTurno: idTurno
       }));
 
-
       detallesConTurno.forEach((detalle: ReservaDetalle) => {
         this.reservaService.addDetalle(detalle).subscribe(detalleResponse => {
-
+          // Handle detalle response if needed
         });
       });
 
       alert('Reserva agregada');
     });
+  }
+
+  convertTimeFormat(timeStr: string): string {
+
+    return timeStr;
+  }
+
+  formatDateInput(dateStr: string): string {
+
+    const [day, month, year] = dateStr.split('-');
+    if (!day || !month || !year) {
+      console.error('Invalid date components');
+      return '';
+    }
+    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
   }
 
 

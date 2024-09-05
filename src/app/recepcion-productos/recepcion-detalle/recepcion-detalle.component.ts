@@ -1,29 +1,32 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ReservaService } from '../../reserva.service';
-import { ReservaDetalle } from '../../reserva.model';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ReservaService } from '../../reserva-turnos/reserva.service';
+import { ReservaDetalle } from '../../reserva-turnos/reserva.model';
 
 @Component({
   selector: 'app-recepcion-detalle',
   templateUrl: './recepcion-detalle.component.html',
   styleUrls: ['./recepcion-detalle.component.css']
 })
-export class RecepcionDetalleComponent implements OnInit {
-  @Input() idTurno!: number;
+export class RecepcionDetalleComponent implements OnChanges {
+  @Input() idTurno!: string; 
   detalles: ReservaDetalle[] = [];
 
   constructor(private reservaService: ReservaService) {}
 
-  ngOnInit(): void {
-    this.obtenerDetalles();
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['idTurno'] && this.idTurno !== undefined) {
+      this.obtenerDetalles();
+    }
   }
 
   obtenerDetalles(): void {
-    this.reservaService.obtenerDetalles(this.idTurno).subscribe((detalles: ReservaDetalle[]) => {
-      // Filtra los detalles en el frontend, si es necesario
-      this.detalles = detalles.filter(detalle => detalle.idTurno === this.idTurno);
-    }, error => {
-      console.error('Error al obtener los detalles del turno', error);
-    });
+    this.reservaService.obtenerDetalles(this.idTurno).subscribe(
+      (detalles: ReservaDetalle[]) => {
+        this.detalles = detalles.filter(detalle => detalle.idTurno === this.idTurno); // Ensure correct type
+      },
+      error => {
+        console.error('Error al obtener los detalles del turno', error);
+      }
+    );
   }
-  
 }

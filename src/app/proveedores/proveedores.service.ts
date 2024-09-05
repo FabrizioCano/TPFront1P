@@ -29,8 +29,8 @@ export class ProveedoresService {
    deleteProveedor(id:string){
     return this.httpClient.delete<Proveedores>(`http://localhost:3000/proveedores/${id}`);
   }
-  
-  getProveedorById(id: number): Observable<Proveedores> {
+
+  getProveedorById(id: string): Observable<Proveedores> {
     return this.httpClient.get<Proveedores>(`http://localhost:3000/proveedores/${id}`);
   }
 }

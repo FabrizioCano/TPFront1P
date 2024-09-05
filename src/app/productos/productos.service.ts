@@ -30,6 +30,8 @@ export class ProductosService {
      deleteProductos(id:string){
       return this.httpClient.delete<Productos>(`http://localhost:3000/productos/${id}`);
     }
-
+    getProductoById(id: string): Observable<Productos> {
+      return this.httpClient.get<Productos>(`http://localhost:3000/productos/${id}`);
+    }
   }
 

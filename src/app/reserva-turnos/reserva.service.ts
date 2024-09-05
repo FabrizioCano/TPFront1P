@@ -36,6 +36,21 @@ export class ReservaService {
 
   // Guardar detalle
   addDetalle(detalle: ReservaDetalle): Observable<ReservaDetalle> {
-    return this.http.post<ReservaDetalle>(`${this.apiUrl}/reservas`, detalle);
+    return this.http.post<ReservaDetalle>(`${this.apiUrl}/detalles`, detalle);
+  }
+
+  obtenerTurnos(): Observable<ReservaCabecera[]> {
+    return this.http.get<ReservaCabecera[]>(`${this.apiUrl}`);
+  }
+
+  obtenerDetalles(idTurno: string): Observable<ReservaDetalle[]> {
+    return this.http.get<ReservaDetalle[]>(`${this.apiUrl}/${idTurno}/detalles`);
+  }
+
+  actualizarTurno(turno: ReservaCabecera): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${turno.id}`, turno);
+  }
+  obtenerTurnosPorFecha(fecha: string): Observable<ReservaCabecera[]> {
+    return this.http.get<ReservaCabecera[]>(`${this.apiUrl}/reservas?fecha=${fecha}`);
   }
 }
