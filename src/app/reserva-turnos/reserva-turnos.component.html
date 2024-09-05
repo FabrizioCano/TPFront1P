@@ -6,52 +6,80 @@
     <title>Reserva de Turnos de Recepción</title>
 </head>
 <body>
-    <div class="col-6 mx-auto card p-3 shadow-lg">
-        <h2 class="text-center">Reserva de Turnos de Recepción</h2>
-        
-        <form (ngSubmit)="guardarReserva()">
-            <!-- Campos de la cabecera -->
-            <div class="mb-3">
-                <label for="horaInicio" class="form-label">Hora Inicio Agendamiento:</label>
-                <select id="horaInicio" [(ngModel)]="cabecera.horaInicioAgendamiento" name="horaInicio" class="form-select">
-                    <option *ngFor="let hora of horasDisponibles" [value]="hora">{{hora}}</option>
-                </select>
-            </div>
-    
-            <div class="mb-3">
-                <label for="horaFin" class="form-label">Hora Fin Agendamiento:</label>
-                <select id="horaFin" [(ngModel)]="cabecera.horaFinAgendamiento" name="horaFin" class="form-select">
-                    <option *ngFor="let hora of horasDisponibles" [value]="hora">{{hora}}</option>
-                </select>
-            </div>
-    
-            <div class="mb-3">
-                <label for="proveedor" class="form-label">Proveedor:</label>
-                <select id="proveedor" [(ngModel)]="cabecera.idProveedor" name="proveedor" class="form-select">
-                    <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{proveedor.nombre}}</option>
-                </select>
-            </div>
-    
-            <!-- Detalles -->
-            <div *ngFor="let detalle of detalles; let i = index" class="mb-3 border p-2 rounded">
-                <label for="producto" class="form-label">Producto:</label>
-                <select id="producto" [(ngModel)]="detalle.idProducto" name="producto{{i}}" class="form-select mb-2">
-                    <option *ngFor="let producto of productos" [value]="producto.id">{{producto.nombre}}</option>
-                </select>
-    
-                <label for="cantidad" class="form-label">Cantidad:</label>
-                <input id="cantidad" type="number" [(ngModel)]="detalle.cantidad" name="cantidad{{i}}" class="form-control">
-                
-                <button type="button" (click)="eliminarDetalle(i)" class="btn btn-danger mt-2">Eliminar</button>
-            </div>
-    
-            <!-- Botón para agregar un nuevo detalle -->
-            <button type="button" (click)="agregarDetalle()" class="btn btn-secondary mb-3">Agregar Producto</button>
-    
-            <!-- Botón para guardar la reserva -->
-            <button type="submit" class="btn btn-primary w-100">Guardar Reserva</button>
+
+    <div class="container">
+        <h2 class="text-center mt-4">Reserva de Turnos de Recepción</h2>
+      
+        <!-- Formulario de la cabecera de reserva -->
+        <form [formGroup]="reservaForm" (ngSubmit)="onSubmit()" class="col-6 mx-auto card p-3 shadow-lg">
+          <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha</label>
+            <input id="fecha" type="date" class="form-control" formControlName="fecha" required>
+          </div>
+      
+          <div class="mb-3">
+            <label for="horaInicioAgendamiento" class="form-label">Hora Inicio Agendamiento</label>
+            <select id="horaInicioAgendamiento" class="form-control" formControlName="horaInicioAgendamiento" required>
+              <option *ngFor="let hora of horasDisponibles" [value]="hora">{{hora}}</option>
+            </select>
+          </div>
+      
+          <div class="mb-3">
+            <label for="horaFinAgendamiento" class="form-label">Hora Fin Agendamiento</label>
+            <select id="horaFinAgendamiento" class="form-control" formControlName="horaFinAgendamiento" required>
+              <option *ngFor="let hora of horasDisponibles" [value]="hora">{{hora}}</option>
+            </select>
+          </div>
+      
+          <div class="mb-3">
+            <label for="idProveedor" class="form-label">Proveedor</label>
+            <select id="idProveedor" class="form-control" formControlName="idProveedor" required>
+              <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{proveedor.nombre}}</option>
+            </select>
+          </div>
+      
+          <div class="mb-3">
+            <label for="idJaula" class="form-label">Jaula</label>
+            <select id="idJaula" class="form-control" formControlName="id" required>
+              <option *ngFor="let jaula of jaulas" [value]="jaula.id">{{jaula.nombre}}</option>
+            </select>
+          </div>
+      
+          <div class="mb-3">
+            <label for="horaInicioRecepcion" class="form-label">Hora Inicio Recepción</label>
+            <select id="horaInicioRecepcion" class="form-control" formControlName="horaInicioRecepcion" required>
+              <option *ngFor="let hora of horasDisponibles" [value]="hora">{{hora}}</option>
+            </select>
+          </div>
+      
+          <div class="mb-3">
+            <label for="horaFinRecepcion" class="form-label">Hora Fin Recepción</label>
+            <select id="horaFinRecepcion" class="form-control" formControlName="horaFinRecepcion" required>
+              <option *ngFor="let hora of horasDisponibles" [value]="hora">{{hora}}</option>
+            </select>
+          </div>
+      
+          <!-- Detalles dinámicos -->
+          <div *ngFor="let detalle of detalles; let i = index" class="mb-3 border p-2 rounded">
+            <label for="producto" class="form-label">Producto:</label>
+            <select id="producto" [(ngModel)]="detalle.idProducto" name="producto{{i}}" class="form-select mb-2" required>
+              <option *ngFor="let producto of productos" [value]="producto.id">{{producto.nombre}}</option>
+            </select>
+      
+            <label for="cantidad" class="form-label">Cantidad:</label>
+            <input id="cantidad" type="number" [(ngModel)]="detalle.cantidad" name="cantidad{{i}}" class="form-control" required>
+      
+            <button type="button" (click)="eliminarDetalle(i)" class="btn btn-danger mt-2">Eliminar</button>
+          </div>
+      
+          <!-- Botón para agregar un nuevo detalle -->
+          <button type="button" (click)="agregarDetalle()" class="btn btn-secondary mb-3">Agregar Producto</button>
+      
+          <!-- Botón para guardar la reserva -->
+          <button type="submit" class="btn btn-primary w-100">Guardar Reserva</button>
         </form>
-    </div>
+      </div>
+      
     
 </body>
 </html>

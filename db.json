@@ -21,6 +21,14 @@
     {
       "id": "3",
       "nombre": "Frutas"
+    },
+    {
+      "id": "4",
+      "nombre": "Verduras"
+    },
+    {
+      "id": "5",
+      "nombre": "Legumbre"
     }
   ],
   "jaulas": [
@@ -28,6 +36,17 @@
       "id": "1",
       "nombre": "Jaula A",
       "enUso": false
+    },
+    {
+      "id": "2",
+      "nombre": "Jaula B",
+      "enUso": false
+    },
+    {
+      "id": "3",
+      "nombre": "Jaula C",
+      "enUso": false
     }
-  ]
+  ],
+  "reservas": []
 }
