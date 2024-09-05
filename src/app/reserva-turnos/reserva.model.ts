@@ -1,16 +1,18 @@
 export interface ReservaCabecera {
-    idTurno: number;
+    detalles_res: { idProducto: string; cantidad: number;idTurno?:string;id?:string }[];
+    id: string;
     fecha: string;
     horaInicioAgendamiento: string;
     horaFinAgendamiento: string;
-    idProveedor: number;
-    idJaula?: number;
+    idProveedor: string;
+    idJaula?: string;
     horaInicioRecepcion?: string;
     horaFinRecepcion?: string;
   }
-  
+
   export interface ReservaDetalle {
-    idTurno: number;
-    idProducto: number;
+    id: string;
+    idProducto: string;
     cantidad: number;
+    idTurno?:string;
   }

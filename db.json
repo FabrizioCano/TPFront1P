@@ -21,6 +21,14 @@
     {
       "id": "3",
       "nombre": "Frutas"
+    },
+    {
+      "id": "4",
+      "nombre": "Verduras"
+    },
+    {
+      "id": "5",
+      "nombre": "Legumbre"
     }
   ],
   "jaulas": [
