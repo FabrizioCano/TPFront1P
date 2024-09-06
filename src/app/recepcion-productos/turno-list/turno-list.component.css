@@ -1,0 +1,87 @@
+/* Eliminar el margen o padding por defecto */
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #1a1a1a; /* Fondo oscuro */
+  color: white;
+}
+
+/* Ajustes de la tabla */
+.table {
+  background-color: #2c2c2c;
+  border-radius: 8px;
+}
+
+th, td {
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  text-align: center;
+}
+
+thead th {
+  background-color: #388e8e;
+}
+
+tbody tr {
+  background-color: #3c3c3c;
+  transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+  background-color: #505050;
+}
+
+/* Estilos para botones */
+.btn-primary, .btn-success, .btn-secondary {
+  background-color: #388e8e;
+  border: none;
+  color: white;
+}
+
+.btn-primary:hover, .btn-success:hover, .btn-secondary:hover {
+  background-color: #2b6f6f;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Estilo para botón de ver detalles */
+.btn-link {
+  color: #00c1f7;
+  text-decoration: underline;
+}
+
+.btn-link:hover {
+  color: #00a4d4;
+}
+
+/* Estilos para el modal */
+.modal-content {
+  background-color: #2c2c2c;
+  color: rgb(3, 3, 3);
+}
+
+.modal-header {
+  border-bottom: 1px solid #505050;
+}
+
+.modal-footer {
+  border-top: 1px solid #505050;
+}
+
+.modal-header .close {
+  color: white;
+}
+
+.modal-footer .btn-primary {
+  background-color: #00c1f7;
+  border-radius: 20px;
+}
+
+.modal-footer .btn-primary:hover {
+  background-color: #00a4d4;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Margen superior ajustado para evitar el espacio blanco */
+.navbar {
+  margin-bottom: 0;
+}

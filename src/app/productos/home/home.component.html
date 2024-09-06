@@ -1,33 +1,42 @@
 <div class="container">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-          <h2 class="text-capitalize text-white">Productos</h2>
-      </div>
-      <div class="d-flex me-3">
-          <button class="btn btn-success" routerLink="/productos/create">Add+</button>
-      </div>
-  </nav>
-</div>
+  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <h2 class="text-capitalize text-white">Productos</h2>
+    </div>
+    <div class="d-flex me-3">
+      <button class="btn btn-success" routerLink="/productos/create">Agregar+</button>
+    </div>
+  </nav> -->
 
-<div class="container">
+  <div class="d-flex justify-content-between me-3 titulo">
+    <h2 class="text-capitalize text-white">Productos</h2>
+    <button class="btn btn-success" routerLink="/productos/create">Agregar+</button>
+  </div>
+
+  <!-- Campo de búsqueda -->
+  <div class="form-group mt-3">
+    <input type="text" class="form-control" [(ngModel)]="filtroNombre" placeholder="Buscar por nombre">
+  </div>
+
+  <div class="container mt-3">
     <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">idProducto</th>
-                <th scope="col">Nombre</th>
-                <th scope="col col-center">Accion</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr *ngFor="let item of listproductos">
-                <th scope="row">{{item.id}}</th>
-                <td>{{item.nombre}}</td>
-                <td>
-                    <a href="" class="btn btn-secondary" [routerLink] = "['/productos/edit',item.id]">Editar</a>
-                    <button type="button" (click)="delete(item.id)" class="btn btn-danger ms-4">Borrar</button>
-                </td>
-            </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <th scope="col">ID Producto</th>
+          <th scope="col">Nombre</th>
+          <th scope="col col-center">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of productosFiltrados">
+          <th scope="row">{{ item.id }}</th>
+          <td>{{ item.nombre }}</td>
+          <td>
+            <a href="" class="btn btn-secondary" [routerLink]="['/productos/edit', item.id]">Editar</a>
+            <button type="button" (click)="delete(item.id)" class="btn btn-danger ms-4">Borrar</button>
+          </td>
+        </tr>
+      </tbody>
     </table>
+  </div>
 </div>

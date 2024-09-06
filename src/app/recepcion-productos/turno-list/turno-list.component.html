@@ -1,9 +1,9 @@
-<div class="container">
-  <h2>Listado de Turnos</h2>
+<div class="container mt-4">
+  <h2 class="text-center">Listado de Turnos</h2>
 
   <!-- Date Picker -->
   <div class="form-group">
-    <label for="fecha">Fecha:</label>
+    <label for="fecha" class="form-label">Fecha:</label>
     <input type="date" id="fecha" [(ngModel)]="fechaSeleccionada" class="form-control">
   </div>
 
@@ -13,37 +13,59 @@
   </div>
 
   <!-- Turnos Table -->
-  <table class="table table-striped">
+  <table class="table table-striped mt-4">
     <thead>
       <tr>
+        <th>Inicio Agendamiento</th>
+        <th>Fin Agendamiento</th>
         <th>Proveedor</th>
+        <th>Estado</th>
         <th>Jaula</th>
-        <th>Hora Inicio Agendamiento</th>
-        <th>Hora Fin Agendamiento</th>
-        <th>Hora Inicio Recepción</th>
-        <th>Hora Fin Recepción</th>
-        <th>Detalles</th>
+        <th>Inicio Recepción</th>
+        <th>Fin Recepción</th>
         <th>Acciones</th>
+        <th>Detalles</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let turno of turnosFiltrados">
-        <td>{{ obtenerNombreProveedor(turno.idProveedor) }}</td>
-        <td>{{ obtenerJaula(turno.idJaula) }}</td>
         <td>{{ formatearHora(turno.horaInicioAgendamiento) }}</td>
         <td>{{ formatearHora(turno.horaFinAgendamiento) }}</td>
+        <td>{{ obtenerNombreProveedor(turno.idProveedor) }}</td>
+        <td>{{ obtenerEstado(turno) }}</td>
+        <td>{{ obtenerJaula(turno.idJaula) }}</td>
         <td>{{ formatearHora(turno.horaInicioRecepcion) }}</td>
         <td>{{ formatearHora(turno.horaFinRecepcion) }}</td>
         <td>
-          <button (click)="verDetalles(turno.id)" class="btn btn-info">Ver Detalles</button>
+          <button *ngIf="puedeIniciarRecepcion(turno)" class="btn btn-primary" (click)="abrirModalRecepcion(turno)">Iniciar Recepción</button>
+          <button *ngIf="puedeFinalizarRecepcion(turno)" class="btn btn-success" (click)="finalizarRecepcion(turno)">Finalizar Recepción</button>
         </td>
-        <td>
-          <button (click)="abrirModalRecepcion(turno)" class="btn btn-primary" [disabled]="!puedeIniciarRecepcion(turno)">Iniciar Recepción</button>
-          <button (click)="finalizarRecepcion(turno)" class="btn btn-success" [disabled]="!puedeFinalizarRecepcion(turno)">Finalizar Recepción</button>
-        </td>
+        <td><button class="btn btn-link" (click)="verDetalles(turno.id)">Ver Detalles</button></td>
       </tr>
     </tbody>
   </table>
+
+  <!-- Modal for Reception -->
+  <ng-template #modalRecepcion let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Iniciar Recepción</h4>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <label for="jaula">Seleccione una Jaula</label>
+      <select id="jaula" class="form-control" [(ngModel)]="jaulaSeleccionada">
+        <option *ngFor="let jaula of jaulasDisponibles" [ngValue]="jaula">
+          {{ obtenerJaula(jaula.id) }}
+        </option>
+      </select>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" (click)="confirmarRecepcion()">Aceptar</button>
+      <button class="btn btn-secondary" (click)="modal.dismiss()">Cerrar</button>
+    </div>
+  </ng-template>
 
   <!-- Modal for Details -->
   <ng-template #modalDetalle let-modal>
@@ -71,30 +93,6 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Cerrar</button>
-    </div>
-  </ng-template>
-
-  <!-- Modal for Reception -->
-  <ng-template #modalRecepcion let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title">Recepción del Turno</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form>
-        <div class="form-group">
-          <label for="jaula">Seleccionar Jaula:</label>
-          <select id="jaula" [(ngModel)]="jaulaSeleccionada" name="jaula" class="form-control">
-            <option *ngFor="let jaula of jaulasDisponibles" [ngValue]="jaula">{{ obtenerJaula(jaula.id) }}</option>
-          </select>
-        </div>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Cancelar</button>
-      <button type="button" class="btn btn-primary" (click)="confirmarRecepcion()">Confirmar Recepción</button>
     </div>
   </ng-template>
 </div>

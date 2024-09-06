@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef  } from '@angular/core';
 import { ProveedoresService } from '../../proveedores/proveedores.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { formatDate } from '@angular/common';
@@ -32,15 +32,22 @@ export class TurnoListComponent implements OnInit {
     private proveedoresService: ProveedoresService,
     private jaulasService: JaulasService,
     private productosService: ProductosService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.fechaSeleccionada = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-    this.cargarTurnos();
+    this.cargarTodosLosTurnos(); // Cargar todos los turnos inicialmente
     this.cargarJaulasDisponibles();
+    this.cdr.detectChanges(); 
   }
-
+  // Cargar todos los turnos sin aplicar filtros
+  cargarTodosLosTurnos(): void {
+    this.reservaService.obtenerTurnos().subscribe(turnos => {
+      this.turnos = turnos;
+      this.turnosFiltrados = turnos; // Mostrar todos los turnos inicialmente
+    });
+  }
   cargarTurnos(): void {
     const fechaFiltrada = formatDate(this.fechaSeleccionada, 'yyyy-MM-dd', 'en');
     this.reservaService.obtenerTurnosPorFecha(fechaFiltrada).subscribe(turnos => {
@@ -57,17 +64,11 @@ export class TurnoListComponent implements OnInit {
     console.log('Datos de turnos:', this.turnos);
 
     if (this.fechaSeleccionada) {
-
-      this.turnosFiltrados = this.turnos
-        .filter(turno => {
-          console.log('Turno fecha:', turno.fecha);
-          return turno.fecha === this.fechaSeleccionada;
-        })
+      const fechaFiltrada = formatDate(this.fechaSeleccionada, 'yyyy-MM-dd', 'en');
+      this.turnosFiltrados = this.turnos.filter(turno => turno.fecha === fechaFiltrada)
         .sort((a, b) => a.horaInicioAgendamiento.localeCompare(b.horaInicioAgendamiento));
-
-      console.log('Turnos filtrados:', this.turnosFiltrados);
     } else {
-      this.turnosFiltrados = [];
+      this.turnosFiltrados = this.turnos; 
     }
   }
 
@@ -82,29 +83,30 @@ export class TurnoListComponent implements OnInit {
     if (this.proveedores[idProveedor]) {
       return this.proveedores[idProveedor];
     }
-
+  
     this.proveedoresService.getProveedorById(idProveedor).subscribe(proveedor => {
       this.proveedores[idProveedor] = proveedor.nombre;
     }, error => {
       this.proveedores[idProveedor] = 'Desconocido';
     });
-
+  
     return 'Cargando...';
   }
-
+  
   obtenerNombreProducto(idProducto: string): string {
     if (this.productosCache[idProducto]) {
       return this.productosCache[idProducto];
     }
-
+  
     this.productosService.getProductoById(idProducto).subscribe(producto => {
       this.productosCache[idProducto] = producto.nombre;
     }, error => {
       this.productosCache[idProducto] = 'Desconocido';
     });
-
+  
     return 'Cargando...';
   }
+  
 
   obtenerJaula(idJaula?: string): string {
     return idJaula ? `Jaula ${idJaula}` : 'Sin Jaula';
@@ -115,75 +117,104 @@ export class TurnoListComponent implements OnInit {
       this.productosDelTurno = detalles;
       this.modalService.open(this.modalDetalle, { ariaLabelledBy: 'modal-basic-title' });
     });
+  }  
+  guardarHoraActual(): string {
+    const fecha = new Date();
+    const horas = fecha.getHours().toString().padStart(2, '0');
+    const minutos = fecha.getMinutes().toString().padStart(2, '0');
+    return `${horas}:${minutos}`;  // Devuelve la hora en formato HH:mm
   }
-
+  
   confirmarRecepcion(): void {
     if (this.jaulaSeleccionada && this.turnoSeleccionado) {
       const turnoSeleccionado = this.turnoSeleccionado;
-
+  
+      turnoSeleccionado.horaInicioRecepcion = this.guardarHoraActual();  
       turnoSeleccionado.idJaula = this.jaulaSeleccionada.id;
-      turnoSeleccionado.horaInicioRecepcion = new Date().toISOString();
       this.jaulaSeleccionada.enUso = true;
-
+  
+      // Actualizamos el turno con la hora de inicio de recepción
       this.reservaService.actualizarTurno(turnoSeleccionado).subscribe(() => {
         this.filtrarTurnos();
       });
-
+  
+      // Actualizamos la jaula como en uso
       this.jaulasService.updateJaula(this.jaulaSeleccionada).subscribe(() => {
-        this.cargarJaulasDisponibles();
+        this.cargarJaulasDisponibles();  // Refrescar jaulas disponibles.
       });
-
-      this.modalService.dismissAll();
+  
+      this.modalService.dismissAll();  // Cerrar el modal después de la confirmación.
     } else {
       console.error('No se puede iniciar la recepción: turnoSeleccionado o jaulaSeleccionada es null');
     }
   }
-
+  
+  
   abrirModalRecepcion(turno: ReservaCabecera): void {
     this.turnoSeleccionado = turno;
-    this.modalService.open(this.modalRecepcion, { ariaLabelledBy: 'modal-basic-title' });
+    this.jaulasService.getJaulasLibres().subscribe(jaulas => {
+      this.jaulasDisponibles = jaulas;
+      this.modalService.open(this.modalRecepcion, { ariaLabelledBy: 'modal-basic-title' });
+    });
   }
 
   finalizarRecepcion(turno: ReservaCabecera): void {
-    turno.horaFinRecepcion = new Date().toISOString();
-
+    turno.horaFinRecepcion = this.guardarHoraActual()
+  
     const jaulaAsignada = this.jaulasDisponibles.find(jaula => jaula.id === turno.idJaula);
-
+  
     if (jaulaAsignada) {
-      jaulaAsignada.enUso = false;
-    }
-
-    this.reservaService.actualizarTurno(turno).subscribe(() => {
-      this.cargarTurnos();
-    });
-
-    if (jaulaAsignada) {
+      jaulaAsignada.enUso = false;  // Marcar la jaula como disponible.
+  
       this.jaulasService.updateJaula(jaulaAsignada).subscribe(() => {
         this.cargarJaulasDisponibles();
       });
     }
+  
+    this.reservaService.actualizarTurno(turno).subscribe(() => {
+      this.filtrarTurnos();  // Actualizamos la lista de turnos.
+    });
   }
+  
 
   puedeIniciarRecepcion(turno: ReservaCabecera): boolean {
-    return !turno.horaInicioRecepcion;
+    return !turno.horaInicioRecepcion;  // Mostrar "Iniciar Recepción" solo si no se ha iniciado.
   }
-
+  
   puedeFinalizarRecepcion(turno: ReservaCabecera): boolean {
-    return !!turno.horaInicioRecepcion && !turno.horaFinRecepcion;
+    return !!turno.horaInicioRecepcion && !turno.horaFinRecepcion;  // Mostrar "Finalizar Recepción" solo si ha iniciado pero no ha terminado.
   }
-
+  
+  
   obtenerEstado(turno: ReservaCabecera): string {
-    if (turno.horaFinRecepcion) return 'completado';
-    if (turno.horaInicioRecepcion) return 'en recepcion';
+    if (turno.horaFinRecepcion) {
+      return 'completado';
+    }
+    if (turno.horaInicioRecepcion && !turno.horaFinRecepcion) {
+      return 'en recepción';
+    }
     return 'pendiente';
   }
+  
 
   formatearHora(horaISO?: string): string {
     if (!horaISO) {
+      return '-';  // Si no existe la hora, devuelves un guion.
+    }
+  
+    const fecha = new Date(`1970-01-01T${horaISO}:00`);
+    return isNaN(fecha.getTime()) ? 'Hora inválida' : fecha.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+  
+  
+  formatearFecha(fechaISO: string): string {
+    if (!fechaISO) {
       return '-';
     }
-
-    const fecha = new Date(horaISO);
-    return fecha.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    const fecha = new Date(fechaISO);
+    return isNaN(fecha.getTime()) ? 'Fecha inválida' : fecha.toLocaleDateString();  // Devuelve la fecha en formato local.
   }
+  
+  
+  
 }

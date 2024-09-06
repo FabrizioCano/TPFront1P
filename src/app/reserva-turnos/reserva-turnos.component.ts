@@ -5,6 +5,10 @@ import { Proveedores } from '../proveedores/proveedores';
 import { Productos } from '../productos/productos';
 import { Jaula } from '../jaulas/jaulas';
 import { ReservaCabecera, ReservaDetalle } from './reserva.model';
+import { JaulasService } from '../jaulas/jaulas.service'
+import { ProveedoresService } from '../proveedores/proveedores.service';
+import { ProductosService } from '../productos/productos.service';
+
 
 @Component({
   selector: 'app-reserva',
@@ -24,7 +28,13 @@ export class ReservaTurnosComponent implements OnInit {
     '16:00', '16:30', '17:00', '17:30', '18:00'
   ];
 
-  constructor(private fb: FormBuilder, private reservaService: ReservaService) {
+  constructor(
+    private fb: FormBuilder, 
+    private reservaService: ReservaService,
+    private proveedoresService: ProveedoresService,  // Proveedores Service correcto
+    private productosService: ProductosService,      // Productos Service correcto
+    private jaulasService: JaulasService             // Jaulas Service correcto
+  ) {
     this.reservaForm = this.fb.group({
       fecha: ['', Validators.required],
       horaInicioAgendamiento: ['', Validators.required],
@@ -42,19 +52,21 @@ export class ReservaTurnosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.reservaService.getProveedores().subscribe(data => {
+    // Mover la llamada a ProveedoresService
+    this.proveedoresService.getAll().subscribe((data: Proveedores[]) => {
       this.proveedores = data;
     });
 
-    this.reservaService.getProductos().subscribe(data => {
+    // Llamada al ProductosService
+    this.productosService.getAll().subscribe((data: Productos[]) => {
       this.productos = data;
     });
 
-    this.reservaService.getJaulas().subscribe(data => {
+    // Llamada al JaulasService
+    this.jaulasService.getJaulas().subscribe((data: Jaula[]) => {
       this.jaulas = data;
     });
   }
-
   agregarDetalle() {
     const detalleForm = this.fb.group({
       idProducto: ['', Validators.required],
@@ -113,9 +125,8 @@ export class ReservaTurnosComponent implements OnInit {
   }
 
   formatDateInput(dateStr: string): string {
-
-    const [day, month, year] = dateStr.split('-');
-    if (!day || !month || !year) {
+    const [year, month, day] = dateStr.split('-');
+    if (!year || !month || !day) {
       console.error('Invalid date components');
       return '';
     }

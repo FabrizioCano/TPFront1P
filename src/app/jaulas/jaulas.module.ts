@@ -10,11 +10,11 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    HomeComponent,
     CreateComponent,
     EditComponent
   ],
   imports: [
+    HomeComponent,
     CommonModule,
     JaulasRoutingModule,
     FormsModule
