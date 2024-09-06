@@ -13,13 +13,14 @@ import { AppWrapperComponent } from './app-wrapper/app-wrapper.component';
 import { ProductosModule } from './productos/productos.module';
 import { JaulasModule } from './jaulas/jaulas.module';
 import { ReservaTurnosComponent } from './reserva-turnos/reserva-turnos.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AppWrapperComponent,
-    ReservaTurnosComponent
+    ReservaTurnosComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,12 +32,14 @@ import { ReservaTurnosComponent } from './reserva-turnos/reserva-turnos.componen
     ProductosModule,
     ProveedoresModule,
     JaulasModule,
-    RouterModule
+    RouterModule,
+
 
   ],
   providers: [
     provideClientHydration(),
     provideHttpClient(withFetch()),
+    provideAnimationsAsync('noop'),
   ],
   bootstrap: [AppComponent]
 })
