@@ -1,0 +1,118 @@
+/* General body settings */
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #1a1a1a; /* Fondo oscuro */
+  color: white;
+}
+
+.titulo{
+  padding: 15px;
+  background-color: #1a1a1a;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+h2, h1 {
+  color: #f2f2f2;
+}
+
+.navbar {
+  background-color: #1a1a1a;
+}
+
+/* Tablas */
+.table {
+  background-color: #2c2c2c;
+  border-radius: 8px;
+  width: 100%;
+}
+
+th, td {
+  color: rgb(14, 13, 13);
+  padding: 15px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+thead th {
+  background-color: #388e8e;
+}
+
+tbody tr {
+  background-color: #3c3c3c;
+  transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+  background-color: #505050;
+}
+
+/* Botones */
+.btn-primary, .btn-success, .btn-danger, .btn-secondary {
+  background-color: #388e8e;
+  border: none;
+  color: white;
+  border-radius: 20px;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover, .btn-success:hover, .btn-danger:hover, .btn-secondary:hover {
+  background-color: #2b6f6f;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-secondary {
+  background-color: #5c5c5c;
+}
+
+.btn-secondary:hover {
+  background-color: #464646;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Formularios */
+form {
+  background-color: #2c2c2c;
+  border-radius: 8px;
+}
+
+.form-control {
+  background-color: #1e1e1e;
+  color: white;
+  border: 1px solid #4a4a4a;
+}
+
+.form-control:focus {
+  background-color: #333;
+  color: white;
+  border-color: #00c1f7;
+  box-shadow: none;
+}
+
+label {
+  color: #f2f2f2;
+}
+
+/* Placeholder styling for input */
+::placeholder {
+  color: #aaa;
+}
+
+/* Centrar contenido en la tabla */
+.text-center {
+  text-align: center;
+}
+
+/* Para evitar el espacio blanco bajo el navbar */
+.navbar {
+  margin-bottom: 0;
+}
+
+/* Espaciado adecuado entre los botones en la misma celda */
+.btn {
+  margin-bottom: 10px;
+}

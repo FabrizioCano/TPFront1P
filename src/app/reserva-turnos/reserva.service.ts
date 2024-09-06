@@ -15,9 +15,9 @@ export class ReservaService {
   constructor(private http: HttpClient) {}
 
   // Obtener proveedores
-  getProveedores(): Observable<Proveedores[]> {
-    return this.http.get<Proveedores[]>(`${this.apiUrl}/proveedores`);
-  }
+  // getProveedores(): Observable<Proveedores[]> {
+  //   return this.http.get<Proveedores[]>(`${this.apiUrl}/proveedores`);
+  // }
 
   // Obtener productos
   getProductos(): Observable<Productos[]> {
@@ -25,9 +25,9 @@ export class ReservaService {
   }
 
   // Obtener productos
-  getJaulas(): Observable<Jaula[]> {
-    return this.http.get<Jaula[]>(`${this.apiUrl}/jaulas`);
-  }
+  // getJaulas(): Observable<Jaula[]> {
+  //   return this.http.get<Jaula[]>(`${this.apiUrl}/jaulas`);
+  // }
 
   // Guardar reserva
   addReserva(reserva: ReservaCabecera): Observable<ReservaCabecera> {
@@ -39,17 +39,22 @@ export class ReservaService {
     return this.http.post<ReservaDetalle>(`${this.apiUrl}/detalles`, detalle);
   }
 
+  // Obtener todos los turnos
   obtenerTurnos(): Observable<ReservaCabecera[]> {
-    return this.http.get<ReservaCabecera[]>(`${this.apiUrl}`);
+    return this.http.get<ReservaCabecera[]>(`${this.apiUrl}/reservas`);  // Ruta corregida
   }
 
+  // Obtener detalles por turno
   obtenerDetalles(idTurno: string): Observable<ReservaDetalle[]> {
-    return this.http.get<ReservaDetalle[]>(`${this.apiUrl}/${idTurno}/detalles`);
+    return this.http.get<ReservaDetalle[]>(`${this.apiUrl}/detalles?idTurno=${idTurno}`);  // Ruta corregida
+  }
+  
+  // Actualizar un turno
+  actualizarTurno(turno: ReservaCabecera): Observable<ReservaCabecera> {
+    return this.http.put<ReservaCabecera>(`${this.apiUrl}/reservas/${turno.id}`, turno);
   }
 
-  actualizarTurno(turno: ReservaCabecera): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${turno.id}`, turno);
-  }
+  // Obtener turnos por fecha
   obtenerTurnosPorFecha(fecha: string): Observable<ReservaCabecera[]> {
     return this.http.get<ReservaCabecera[]>(`${this.apiUrl}/reservas?fecha=${fecha}`);
   }

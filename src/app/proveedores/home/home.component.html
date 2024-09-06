@@ -1,34 +1,51 @@
 <div class="container">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-          <h2 class="text-capitalize text-white">Proveedores</h2>
-      </div>
-      <div class="d-flex me-3">
-          <button class="btn btn-success" routerLink="/proveedores/create">Add+</button>
-      </div>
-  </nav>
+  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <h2 class="text-capitalize text-white">Proveedores</h2>
+    </div>
+    <div class="d-flex me-3">
+      <button class="btn btn-success" routerLink="/proveedores/create">Agregar+</button>
+    </div> -->
+    <div class="d-flex justify-content-between me-3 titulo">
+      <h2 class="text-capitalize text-white">Proveedores</h2>
+      <button class="btn btn-success" routerLink="/proveedores/create">Agregar+</button>
+    </div>
+  <!-- </nav> -->
 </div>
 
-<div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">idProveedor</th>
-                <th scope="col">Nombre</th>
-                <th scope="col col-center">Accion</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr *ngFor="let item of listproveedores">
-                <th scope="row">{{item.id}}</th>
-                <td>{{item.nombre}}</td>
-                <td>
-                    <a href="" class="btn btn-secondary" [routerLink] = "['/proveedores/edit',item.id]">Editar</a>
-                    <button type="button" (click)="delete(item.id)" class="btn btn-danger ms-4">Borrar</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<!-- Search bar for filtering -->
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Buscar por nombre"
+        [(ngModel)]="filtroNombre"
+        (input)="filtrarProveedores()"
+      />
+    </div>
+  </div>
 </div>
 
+<div class="container mt-3">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID Proveedor</th>
+        <th scope="col">Nombre</th>
+        <th scope="col col-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of proveedoresFiltrados">
+        <td scope="row">{{item.id}}</td>
+        <td>{{item.nombre}}</td>
+        <td class="text-center">
+          <a class="btn btn-secondary me-2" [routerLink]="['/proveedores/edit', item.id]">Editar</a>
+          <button type="button" (click)="delete(item.id)" class="btn btn-danger">Borrar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

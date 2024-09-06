@@ -1,20 +1,12 @@
 {
   "proveedores": [
     {
-      "id": "3",
-      "nombre": "House Targaryen"
-    },
-    {
       "id": "4",
       "nombre": "Mordor"
     },
     {
       "id": "9",
-      "nombre": "Fire And blood"
-    },
-    {
-      "id": "1",
-      "nombre": "John"
+      "nombre": "Fire And Blood"
     }
   ],
   "productos": [
@@ -28,24 +20,24 @@
     },
     {
       "id": "5",
-      "nombre": "Legumbre"
+      "nombre": "Legumbres"
     }
   ],
   "jaulas": [
     {
       "id": "1",
       "nombre": "Jaula A",
-      "enUso": false
+      "enUso": true
     },
     {
       "id": "2",
       "nombre": "ts",
-      "enUso": false
+      "enUso": "false"
     },
     {
       "id": "3",
-      "nombre": "jaula 3",
-      "enUso": false
+      "nombre": "Jaula 3",
+      "enUso": true
     }
   ],
   "reservas": [
@@ -55,13 +47,63 @@
       "horaInicioAgendamiento": "07:30",
       "horaFinAgendamiento": "12:30",
       "idProveedor": "3",
-      "idJaula": "1",
-      "horaInicioRecepcion": "10:30",
-      "horaFinRecepcion": "10:30",
+      "idJaula": "2",
+      "horaInicioRecepcion": "20:39",
+      "horaFinRecepcion": "20:39"
+    },
+    {
+      "id": "6b9c",
+      "fecha": "2024-09-05",
+      "horaInicioAgendamiento": "17:30",
+      "horaFinAgendamiento": "18:00",
+      "idProveedor": "9",
+      "idJaula": "2",
+      "horaInicioRecepcion": "17:30",
+      "horaFinRecepcion": "18:00",
+      "detalles_res": [
+        {
+          "idProducto": "4",
+          "cantidad": 13
+        },
+        {
+          "idProducto": "3",
+          "cantidad": 12
+        }
+      ]
+    },
+    {
+      "id": "07ff",
+      "fecha": "2024-09-05",
+      "horaInicioAgendamiento": "15:30",
+      "horaFinAgendamiento": "17:30",
+      "idProveedor": "4",
+      "idJaula": "3",
+      "horaInicioRecepcion": "21:34",
+      "horaFinRecepcion": "22:23",
       "detalles_res": [
         {
           "idProducto": "5",
-          "cantidad": 2
+          "cantidad": 19
+        }
+      ]
+    },
+    {
+      "id": "186c",
+      "fecha": "2024-09-05",
+      "horaInicioAgendamiento": "13:00",
+      "horaFinAgendamiento": "15:30",
+      "idProveedor": "4",
+      "idJaula": "1",
+      "horaInicioRecepcion": "",
+      "horaFinRecepcion": "",
+      "detalles_res": [
+        {
+          "idProducto": "4",
+          "cantidad": 1
+        },
+        {
+          "idProducto": "5",
+          "cantidad": 133
         }
       ]
     }
@@ -78,6 +120,24 @@
       "idProducto": "5",
       "cantidad": 2,
       "idTurno": "19a8"
+    },
+    {
+      "id": "8f36",
+      "idProducto": "5",
+      "cantidad": 19,
+      "idTurno": "07ff"
+    },
+    {
+      "id": "a5a3",
+      "idProducto": "4",
+      "cantidad": 1,
+      "idTurno": "186c"
+    },
+    {
+      "id": "bc76",
+      "idProducto": "5",
+      "cantidad": 133,
+      "idTurno": "186c"
     }
   ]
 }

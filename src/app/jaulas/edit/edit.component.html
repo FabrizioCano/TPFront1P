@@ -2,18 +2,19 @@
   <h2>Editar Jaula</h2>
 
   <form #jaulaForm="ngForm" (ngSubmit)="updateJaula()">
-    <div>
-      <label for="nombre">Nombre:</label>
-      <input type="text" id="nombre" [(ngModel)]="jaula.nombre" name="nombre" required />
+    <div class="form-group">
+      <label for="nombre" class="form-label">Nombre:</label>
+      <input type="text" id="nombre" [(ngModel)]="jaula.nombre" name="nombre" required class="form-control"/>
     </div>
-    <div>
-      <label for="enUso">En Uso:</label>
-      <select id="enUso" [(ngModel)]="jaula.enUso" name="enUso" required>
+    <div class="form-group mt-3">
+      <label for="enUso" class="form-label">En Uso:</label>
+      <select id="enUso" [(ngModel)]="jaula.enUso" name="enUso" required class="form-select">
         <option [value]="true">S</option>
         <option [value]="false">N</option>
       </select>
     </div>
-    <button type="submit">Guardar Cambios</button>
-    <button type="button" [routerLink]="['/jaulas']">Cancelar</button>
+    <button type="submit" class="btn btn-primary mt-4">Guardar Cambios</button>
+    <button type="button" [routerLink]="['/jaulas']" class="btn btn-secondary mt-4 ms-2">Cancelar</button>
   </form>
+  
 </div>
