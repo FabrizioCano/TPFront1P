@@ -15,27 +15,36 @@ import { FormsModule } from '@angular/forms';
 export class HomeComponent implements OnInit {
   listproductos: Productos[]= [];
   filtroNombre: string = '';
+  productosFiltrados: Productos[] = [];
 
   constructor(private serviciosProductos: ProductosService){}
 
   ngOnInit(): void {
       this.serviciosProductos.getAll().subscribe((data: Productos[])=>{
         this.listproductos=data;
+        this.productosFiltrados=data;
       });
   }
 
-  get productosFiltrados(): Productos[] {
-    return this.listproductos.filter(producto =>
-      producto.nombre.toLowerCase().includes(this.filtroNombre.toLowerCase())
+  filtrarProductos() {
+    const filtro = this.filtroNombre.toLowerCase(); // Convertimos a minúsculas para hacer el filtro case insensitive
+    this.productosFiltrados = this.listproductos.filter((producto: Productos) =>
+      producto.nombre.toLowerCase().includes(filtro)
     );
   }
 
-  delete(id:string){
-    this.serviciosProductos.deleteProductos(id).subscribe((data)=> {
-      next: () => {
+  /* get productosFiltrados(): Productos[] {
+    return this.listproductos.filter(producto =>
+      producto.nombre.toLowerCase().includes(this.filtroNombre.toLowerCase())
+    );
+  } */
+
+  deleteItem(id:string){
+    this.serviciosProductos.deleteProductos(id).subscribe( {
+      next: (data) => {
         this.listproductos=this.listproductos.filter(_=>_.id !=id)
-        alert("Se ha borrado el Producto");
-      }
-    });
+        this.productosFiltrados = this.productosFiltrados.filter(_ => _.id != id);
+      },
+    })
   }
 }

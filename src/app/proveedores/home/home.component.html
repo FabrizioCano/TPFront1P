@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="d-flex justify-content-between me-3 titulo">
+    <div class="d-flex justify-content-between me-3 titulo mt-3 p-4">
       <h2 class="text-capitalize text-white">Proveedores</h2>
       <button class="btn btn-success" routerLink="/proveedores/create">Agregar+</button>
     </div>
@@ -36,7 +36,7 @@
         <td>{{item.nombre}}</td>
         <td class="text-center">
           <a class="btn btn-secondary me-2" [routerLink]="['/proveedores/edit', item.id]">Editar</a>
-          <button type="button" (click)="delete(item.id)" class="btn btn-danger">Borrar</button>
+          <button type="button" (click)="deleteItem(item.id)" class="btn btn-danger">Borrar</button>
         </td>
       </tr>
     </tbody>
