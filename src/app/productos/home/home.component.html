@@ -1,13 +1,24 @@
 <div class="container">
-  <div class="d-flex justify-content-between me-3 titulo">
+  <div class="d-flex justify-content-between me-3 mt-3 p-4 titulo">
     <h2 class="text-capitalize text-white">Productos</h2>
     <button class="btn btn-success" routerLink="/productos/create">Agregar+</button>
   </div>
 
   <!-- Campo de búsqueda -->
-  <div class="form-group mt-3">
-    <input type="text" class="form-control" [(ngModel)]="filtroNombre" placeholder="Buscar por nombre">
+  <!-- barra de filtro -->
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Buscar por nombre"
+        [(ngModel)]="filtroNombre"
+        (input)="filtrarProductos()"
+      />
+    </div>
   </div>
+</div>
 
   <div class="container mt-3">
     <table class="table">
@@ -24,7 +35,7 @@
           <td>{{ item.nombre }}</td>
           <td>
             <a href="" class="btn btn-secondary" [routerLink]="['/productos/edit', item.id]">Editar</a>
-            <button type="button" (click)="delete(item.id)" class="btn btn-danger ms-4">Borrar</button>
+            <button type="button" (click)="deleteItem(item.id)" class="btn btn-danger ms-4">Borrar</button>
           </td>
         </tr>
       </tbody>

@@ -26,7 +26,7 @@ export class ProveedoresService {
 
    }
 
-   deleteProveedor(id:string){
+  deleteProveedor(id:string){
     return this.httpClient.delete<Proveedores>(`http://localhost:3000/proveedores/${id}`);
   }
 
