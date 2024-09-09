@@ -1,0 +1,26 @@
+/* Navbar estilo */
+.custom-navbar {
+    background-color: #f8f9fa;
+    border-radius: 30px;
+    padding: 10px;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    color: #000;
+}
+
+.nav-link {
+    color: #000;
+    font-size: 1rem;
+    margin: 0 15px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #17a2b8;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease
+}
+.icons {
+  margin: 4px;
+}

@@ -1,2 +1,35 @@
 
+<nav class="navbar navbar-expand-lg custom-navbar">
+    <div class="container">
+      <a class="navbar-brand" routerLink="/"><i class="fas fa-home icons"></i>Home</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/proveedores/home"><i class="fa-solid fa-truck icons"></i>Proveedores</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/productos/home"><i class="fas fa-box icons"></i>Productos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/jaulas/home"> <i class="fa-solid fa-warehouse icons"></i>Jaulas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"routerLink="/reserva-turnos/">
+             <i class="fas fa-calendar-alt icons"></i>Reservas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/recepcion"><i class="fas fa-clipboard-list icons"></i>Turnos Agendados</a>
+          </li>
+        </ul>
+      </div>
+
+
+    </div>
+  </nav>
+
 <router-outlet></router-outlet>
+
+

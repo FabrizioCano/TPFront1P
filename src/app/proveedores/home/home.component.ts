@@ -2,7 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { Proveedores } from '../proveedores';
 import { ProveedoresService } from '../proveedores.service';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -33,12 +33,13 @@ export class HomeComponent implements OnInit{
     );
   }
 
-  delete(id:string){
-    this.serviciosProveedor.deleteProveedor(id).subscribe((data)=> {
-      next: () => {
-        this.listproveedores=this.listproveedores.filter(_=>_.id !=id)
-        alert("Se ha borrado el Proveedor");
-      }
+  deleteItem(id: string) {
+    this.serviciosProveedor.deleteProveedor(id).subscribe({
+      next: (data) => {
+        this.listproveedores = this.listproveedores.filter(_ => _.id != id);
+        this.proveedoresFiltrados = this.proveedoresFiltrados.filter(_ => _.id != id);
+      },
     });
   }
+  
 }

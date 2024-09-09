@@ -1,12 +1,12 @@
 {
   "proveedores": [
     {
-      "id": "4",
-      "nombre": "Mordor"
-    },
-    {
       "id": "9",
       "nombre": "Fire And Blood"
+    },
+    {
+      "id": "10",
+      "nombre": "German Mendieta"
     }
   ],
   "productos": [
@@ -32,12 +32,17 @@
     {
       "id": "2",
       "nombre": "ts",
-      "enUso": "false"
+      "enUso": true
     },
     {
       "id": "3",
       "nombre": "Jaula 3",
       "enUso": true
+    },
+    {
+      "id": "4",
+      "nombre": "Cage 5",
+      "enUso": false
     }
   ],
   "reservas": [
@@ -93,8 +98,8 @@
       "horaInicioAgendamiento": "13:00",
       "horaFinAgendamiento": "15:30",
       "idProveedor": "4",
-      "idJaula": "1",
-      "horaInicioRecepcion": "",
+      "idJaula": "2",
+      "horaInicioRecepcion": "18:04",
       "horaFinRecepcion": "",
       "detalles_res": [
         {
@@ -104,6 +109,22 @@
         {
           "idProducto": "5",
           "cantidad": 133
+        }
+      ]
+    },
+    {
+      "id": "a465",
+      "fecha": "2024-09-07",
+      "horaInicioAgendamiento": "09:00",
+      "horaFinAgendamiento": "12:30",
+      "idProveedor": "4",
+      "idJaula": "",
+      "horaInicioRecepcion": "",
+      "horaFinRecepcion": "",
+      "detalles_res": [
+        {
+          "idProducto": "4",
+          "cantidad": 1
         }
       ]
     }
@@ -138,6 +159,12 @@
       "idProducto": "5",
       "cantidad": 133,
       "idTurno": "186c"
+    },
+    {
+      "id": "331e",
+      "idProducto": "4",
+      "cantidad": 1,
+      "idTurno": "a465"
     }
   ]
 }
