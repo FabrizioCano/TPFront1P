@@ -24,3 +24,9 @@
 .icons {
   margin: 4px;
 }
+
+body, html {
+    background-color: #1a1a1a;
+    color: white;
+  }
+  
