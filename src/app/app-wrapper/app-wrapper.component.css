@@ -1,59 +1,72 @@
 /* Fondo oscuro */
 :host {
-    background-color: #1a1a1a;
-    color: #e4e0e0;
-    font-weight: bold;
-    min-height: 100vh;
-    display: block;
-  }
+  background-color: #1a1a1a;
+  color: #ffffff;
+  min-height: 100vh;
+  display: block;
+}
 
-  /* Botones personalizados, mismo tamaño */
-  .btn-custom {
-    background-color: #388e8e;  /* Verde agua oscuro */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    width: 250px; /* Tamaño uniforme para todos los botones */
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-    text-align: center;
-  }
+/* Imagen con opacidad */
+.image-container img {
+  opacity: 0.8; /* Baja la opacidad de la imagen */
+  height: 100vh; /* Ocupa toda la altura */
+  width: 100%; /* Ocupa el ancho completo */
+  object-fit: cover;
+  filter: brightness(0.9); /* Agrega un poco de oscurecimiento para mejor contraste */
+}
 
-  .btn-custom:hover {
-    background-color: #2b6f6f; /* Efecto hover: verde más oscuro */
-    color: #e0e0e0;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-    transform: translateY(-2px);
-  }
+/* Botones personalizados, mismo tamaño */
+.btn-custom {
+  background-color: #388e8e; /* Verde más vivo */
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  width: 280px; /* Tamaño uniforme para todos los botones */
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 8px; /* Bordes redondeados */
+  transition: all 0.3s ease;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para resaltar más */
+}
 
-  /* Ajustes para los títulos */
-  .custom-home-title .custom-subtitle {
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-    letter-spacing: 1.5px;
-    font-size: 25px;
-    margin-left: 10%;
-    margin-top: 10rem; /* Ajustar la altura desde la parte superior */
-    margin-bottom: 0;
-    text-align: center;
-    width: 100%;
-    color: #e7e5e5;
-  }
+.btn-custom:hover {
+  background-color : #2b6f6f; /* Verde más oscuro en hover */
+  color: #ffffff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más grande en hover */
+  transform: translateY(-5px); /* Efecto de desplazamiento */
+}
 
-  /* Subtítulo personalizado debajo del título "Home" */
-  .custom-subtitle {
-    color: #afadad;  /* Color más claro que el texto principal */
-    margin-top: 0.5rem;
-    font-size: 25px;
-    font-weight: bold;
-  }
+/* Ajustes para los títulos */
+.custom-home-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700; /* Título más pesado (bold) */
+  letter-spacing: 2px;
+  font-size: 4rem;
+  margin-left: 0; /* Alineado a la derecha */
+  margin-right: 5%; /* Alineado a la derecha */
+  margin-top: 2rem; /* Ajustar la altura desde la parte superior */
+  color: #e3e3e3; /* Mejor contraste en el fondo oscuro */
+  text-shadow: 2px 4px 4px rgba(0, 0, 0, 0.5); /* Sombra para hacer el texto más legible */
+}
 
+/* Subtítulo personalizado debajo del título "Home" */
+.custom-subtitle {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 2rem;
+  margin-left: 0; /* Alineado a la derecha */
+  margin-right: 5%; /* Alineado a la derecha */
+  color: #bdbdbd;  /* Color más claro que el texto principal */
+  margin-top: 1rem;
+  text-shadow: 1px 3px 3px rgba(0, 0, 0, 0.5);
+}
 
-  /* Centrando el contenido */
-  .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
+/* Ajuste para la alineación de los botones */
+.container-fluid .col-5 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding-right: 5%;
+}

@@ -6,6 +6,9 @@ body, html {
   .fondo{
     background-color: #1a1a1a;
     padding: 150px;
+    margin-top: 20px;
+    min-height: 100vh;
+    min-width: 200vh;
   } 
   form {
     background-color: #2c2c2c;

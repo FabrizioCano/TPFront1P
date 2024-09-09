@@ -5,8 +5,11 @@ body, html {
 }
 
 .jaula-form {
+  margin-top: 20px;
+  min-height: 100vh;
+  min-width: 200vh;
+  padding: 150px;
   background-color: #1a1a1a;
-  padding: 200px;
 }
 
 h2 {
