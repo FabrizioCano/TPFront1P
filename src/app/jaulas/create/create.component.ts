@@ -9,7 +9,7 @@ import { Jaula } from '../jaulas';
   styleUrl: './create.component.css'
 })
 export class CreateComponent implements OnInit {
-  newJaula: Jaula = { id: '', nombre: '', enUso: false };
+  newJaula: Jaula = { id: '', nombre: '', enUso: "N" };
 
   constructor(private jaulasService: JaulasService, private router: Router) {}
 

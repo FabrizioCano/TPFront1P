@@ -131,7 +131,7 @@ export class TurnoListComponent implements OnInit {
   
       turnoSeleccionado.horaInicioRecepcion = this.guardarHoraActual();  
       turnoSeleccionado.idJaula = this.jaulaSeleccionada.id;
-      this.jaulaSeleccionada.enUso = true;
+      this.jaulaSeleccionada.enUso = "S";
   
       // Actualizamos el turno con la hora de inicio de recepción
       this.reservaService.actualizarTurno(turnoSeleccionado).subscribe(() => {
@@ -164,7 +164,7 @@ export class TurnoListComponent implements OnInit {
     const jaulaAsignada = this.jaulasDisponibles.find(jaula => jaula.id === turno.idJaula);
   
     if (jaulaAsignada) {
-      jaulaAsignada.enUso = false;  // Marcar la jaula como disponible.
+      jaulaAsignada.enUso = "N";  // Marcar la jaula como disponible.
   
       this.jaulasService.updateJaula(jaulaAsignada).subscribe(() => {
         this.cargarJaulasDisponibles();

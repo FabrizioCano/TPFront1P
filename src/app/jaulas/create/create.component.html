@@ -9,8 +9,8 @@
     <div class="form-group mt-3">
       <label for="enUso" class="form-label">En Uso:</label>
       <select id="enUso" [(ngModel)]="newJaula.enUso" name="enUso" required class="form-select">
-        <option [value]="true">S</option>
-        <option [value]="false">N</option>
+        <option [value]="'N'">N</option>
+        <option [value]="'S'">S</option>        
       </select>
     </div>
     <button type="submit" class="btn btn-primary mt-4">Agregar Jaula</button>

@@ -37,7 +37,7 @@
         <tr *ngFor="let jaula of jaulasFiltradas">
           <td scope="row">{{ jaula.id }}</td>
           <td>{{ jaula.nombre }}</td>
-          <td>{{ jaula.enUso ? 'S' : 'N' }}</td>
+          <td>{{ jaula.enUso }}</td>
           <td>
             <a class="btn btn-secondary" [routerLink]="['/jaulas/edit', jaula.id]">Editar</a>
             <button (click)="deleteJaula(jaula.id)" class="btn btn-danger ms-4">Borrar</button>
