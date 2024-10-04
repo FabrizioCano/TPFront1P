@@ -7,6 +7,14 @@
     {
       "id": "10",
       "nombre": "German Mendieta"
+    },
+    {
+      "id": "11",
+      "nombre": "Custom Admin"
+    },
+    {
+      "id": "12",
+      "nombre": "Mai"
     }
   ],
   "productos": [
@@ -20,29 +28,29 @@
     },
     {
       "id": "5",
-      "nombre": "Legumbres"
+      "nombre": "Bebidas"
     }
   ],
   "jaulas": [
     {
-      "id": "1",
-      "nombre": "Jaula A",
-      "enUso": true
+      "id": "8",
+      "nombre": "JAULA GERMAN",
+      "enUso": "S"
     },
     {
-      "id": "2",
-      "nombre": "ts",
-      "enUso": true
+      "id": "9",
+      "nombre": "jaula de cesar",
+      "enUso": "S"
     },
     {
-      "id": "3",
-      "nombre": "Jaula 3",
-      "enUso": true
+      "id": "10",
+      "nombre": "jaula linda",
+      "enUso": "N"
     },
     {
-      "id": "4",
-      "nombre": "Cage 5",
-      "enUso": false
+      "id": "11",
+      "nombre": "JAULA FABRI",
+      "enUso": "N"
     }
   ],
   "reservas": [
@@ -100,7 +108,7 @@
       "idProveedor": "4",
       "idJaula": "2",
       "horaInicioRecepcion": "18:04",
-      "horaFinRecepcion": "",
+      "horaFinRecepcion": "14:29",
       "detalles_res": [
         {
           "idProducto": "4",
@@ -118,12 +126,80 @@
       "horaInicioAgendamiento": "09:00",
       "horaFinAgendamiento": "12:30",
       "idProveedor": "4",
+      "idJaula": "4",
+      "horaInicioRecepcion": "14:30",
+      "horaFinRecepcion": "14:59",
+      "detalles_res": [
+        {
+          "idProducto": "4",
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": "7b21",
+      "fecha": "2024-09-09",
+      "horaInicioAgendamiento": "09:30",
+      "horaFinAgendamiento": "17:30",
+      "idProveedor": "12",
+      "idJaula": "9",
+      "horaInicioRecepcion": "15:00",
+      "horaFinRecepcion": "",
+      "detalles_res": [
+        {
+          "idProducto": "4",
+          "cantidad": 2
+        }
+      ]
+    },
+    {
+      "id": "a8cd",
+      "fecha": "2024-09-12",
+      "horaInicioAgendamiento": "09:30",
+      "horaFinAgendamiento": "17:00",
+      "idProveedor": "12",
       "idJaula": "",
       "horaInicioRecepcion": "",
       "horaFinRecepcion": "",
       "detalles_res": [
         {
+          "idProducto": "5",
+          "cantidad": 100
+        }
+      ]
+    },
+    {
+      "id": "fef4",
+      "fecha": "2024-09-09",
+      "horaInicioAgendamiento": "15:00",
+      "horaFinAgendamiento": "15:30",
+      "idProveedor": "9",
+      "idJaula": "",
+      "horaInicioRecepcion": "",
+      "horaFinRecepcion": "",
+      "detalles_res": [
+        {
+          "idProducto": "3",
+          "cantidad": 2
+        },
+        {
           "idProducto": "4",
+          "cantidad": 1
+        }
+      ]
+    },
+    {
+      "id": "7326",
+      "fecha": "2024-09-09",
+      "horaInicioAgendamiento": "13:30",
+      "horaFinAgendamiento": "15:00",
+      "idProveedor": "12",
+      "idJaula": "8",
+      "horaInicioRecepcion": "15:10",
+      "horaFinRecepcion": "15:10",
+      "detalles_res": [
+        {
+          "idProducto": "3",
           "cantidad": 1
         }
       ]
@@ -165,6 +241,36 @@
       "idProducto": "4",
       "cantidad": 1,
       "idTurno": "a465"
+    },
+    {
+      "id": "53b4",
+      "idProducto": "4",
+      "cantidad": 2,
+      "idTurno": "7b21"
+    },
+    {
+      "id": "d61f",
+      "idProducto": "5",
+      "cantidad": 100,
+      "idTurno": "a8cd"
+    },
+    {
+      "id": "adae",
+      "idProducto": "3",
+      "cantidad": 2,
+      "idTurno": "fef4"
+    },
+    {
+      "id": "508d",
+      "idProducto": "4",
+      "cantidad": 1,
+      "idTurno": "fef4"
+    },
+    {
+      "id": "06d3",
+      "idProducto": "3",
+      "cantidad": 1,
+      "idTurno": "7326"
     }
   ]
 }
